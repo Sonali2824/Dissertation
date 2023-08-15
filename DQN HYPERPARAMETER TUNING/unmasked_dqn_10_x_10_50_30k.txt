@@ -1,0 +1,100 @@
+Trial: 1 Reward: 11 Buffer Size: 696218 Learning rate: 0.001 Batch Size: 512 Gamma: 0.95 Tau: 1 Seed: 478 Net Arch: [200, 160, 110, 70] Activation function: <class 'torch.nn.modules.activation.LeakyReLU'> Exploration fraction: 0.2170780482390834 Exploration initial eps: 0.2728047920801054 Exploration final eps: 0.31412627417547956
+Score: -3.4 for trail number 1
+Trial: 2 Reward: 6 Buffer Size: 606512 Learning rate: 0.001 Batch Size: 128 Gamma: 0.99 Tau: 0.005 Seed: 834 Net Arch: [50, 50, 50] Activation function: <class 'torch.nn.modules.activation.Softmax'> Exploration fraction: 0.17714557041996226 Exploration initial eps: 0.5956017655349153 Exploration final eps: 0.2881826670902114
+Score: 6.38 for trail number 2
+Trial: 3 Reward: 7 Buffer Size: 552848 Learning rate: 0.001 Batch Size: 640 Gamma: 0.95 Tau: 0.05 Seed: 152 Net Arch: [256, 200, 160, 110, 70] Activation function: <class 'torch.nn.modules.activation.Sigmoid'> Exploration fraction: 0.32350904151556936 Exploration initial eps: 0.37133790617738305 Exploration final eps: 0.33291398732112265
+Score: 10.01 for trail number 3
+Trial: 4 Reward: 6 Buffer Size: 881476 Learning rate: 1e-05 Batch Size: 32 Gamma: 0.99 Tau: 1 Seed: 494 Net Arch: [32, 32] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.12990873569800634 Exploration initial eps: 0.43455187978731113 Exploration final eps: 0.02721140314838215
+Score: 4.82 for trail number 4
+Trial: 5 Reward: 7 Buffer Size: 987490 Learning rate: 2e-06 Batch Size: 120 Gamma: 0.95 Tau: 0.005 Seed: 29 Net Arch: [256, 200, 160, 110, 70] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.8826036438344865 Exploration initial eps: 0.9814729204632506 Exploration final eps: 0.018209611280479154
+Score: 5.83 for trail number 5
+Trial: 6 Reward: 8 Buffer Size: 901356 Learning rate: 0.001 Batch Size: 360 Gamma: 0.99 Tau: 1 Seed: 359 Net Arch: [71, 40] Activation function: <class 'torch.nn.modules.activation.LeakyReLU'> Exploration fraction: 0.2565138433822143 Exploration initial eps: 0.8806345038644531 Exploration final eps: 0.40026801019759656
+Score: -20.85 for trail number 6
+Trial: 7 Reward: 7 Buffer Size: 919788 Learning rate: 1e-05 Batch Size: 360 Gamma: 0.95 Tau: 0.05 Seed: 89 Net Arch: [256, 256] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.22436479952240235 Exploration initial eps: 0.14016938756588415 Exploration final eps: 0.23831197200014656
+Score: 20.3 for trail number 7
+Trial: 8 Reward: 11 Buffer Size: 554116 Learning rate: 2e-06 Batch Size: 120 Gamma: 0.99 Tau: 0.05 Seed: 461 Net Arch: [32, 32] Activation function: <class 'torch.nn.modules.activation.Sigmoid'> Exploration fraction: 0.17714106013611178 Exploration initial eps: 0.5724207212814237 Exploration final eps: 0.0405226372771952
+Score: -2.9 for trail number 8
+Trial: 9 Reward: 8 Buffer Size: 633290 Learning rate: 0.001 Batch Size: 256 Gamma: 0.99 Tau: 0.05 Seed: 419 Net Arch: [32, 32] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.30726300709973353 Exploration initial eps: 0.24105930278405688 Exploration final eps: 0.17749684015678438
+Score: -19.445 for trail number 9
+Trial: 10 Reward: 8 Buffer Size: 747294 Learning rate: 1e-05 Batch Size: 128 Gamma: 0.95 Tau: 0.005 Seed: 286 Net Arch: [200, 160, 110, 70] Activation function: <class 'torch.nn.modules.activation.Sigmoid'> Exploration fraction: 0.22949267420684177 Exploration initial eps: 0.8799708389901174 Exploration final eps: 0.12402241744909882
+Score: -27.39 for trail number 10
+Trial: 11 Reward: 7 Buffer Size: 862076 Learning rate: 0.0003 Batch Size: 360 Gamma: 0.95 Tau: 0.05 Seed: 748 Net Arch: [256, 256] Activation function: <class 'torch.nn.modules.activation.Softmax'> Exploration fraction: 0.4447970622982759 Exploration initial eps: 0.10065400813851325 Exploration final eps: 0.47882646911232246
+Score: 11.51 for trail number 11
+Trial: 12 Reward: 7 Buffer Size: 862680 Learning rate: 0.0003 Batch Size: 360 Gamma: 0.95 Tau: 0.05 Seed: 786 Net Arch: [256, 256] Activation function: <class 'torch.nn.modules.activation.Softmax'> Exploration fraction: 0.4409092249973967 Exploration initial eps: 0.13005454423058443 Exploration final eps: 0.44585570314897677
+Score: 6.0 for trail number 12
+Trial: 13 Reward: 7 Buffer Size: 999088 Learning rate: 0.0003 Batch Size: 360 Gamma: 0.95 Tau: 0.05 Seed: 705 Net Arch: [256, 256] Activation function: <class 'torch.nn.modules.activation.Softmax'> Exploration fraction: 0.5029155378436958 Exploration initial eps: 0.13071343975847988 Exploration final eps: 0.47415301841755636
+Score: 6.67 for trail number 13
+Trial: 14 Reward: 7 Buffer Size: 815981 Learning rate: 0.0001 Batch Size: 64 Gamma: 0.95 Tau: 0.05 Seed: 978 Net Arch: [256, 256] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.4771606694707132 Exploration initial eps: 0.1563199107511768 Exploration final eps: 0.22082328799820772
+Score: 21.14 for trail number 14
+Trial: 15 Reward: 7 Buffer Size: 800733 Learning rate: 0.0001 Batch Size: 64 Gamma: 0.95 Tau: 0.05 Seed: 975 Net Arch: [256, 256] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.6692137259591759 Exploration initial eps: 0.2538372574284452 Exploration final eps: 0.2236951954845248
+Score: 17.76 for trail number 15
+Trial: 16 Reward: 7 Buffer Size: 782855 Learning rate: 0.0001 Batch Size: 64 Gamma: 0.95 Tau: 0.05 Seed: 618 Net Arch: [256, 256] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.358349964246999 Exploration initial eps: 0.45576407652524353 Exploration final eps: 0.22340755787647612
+Score: 19.84 for trail number 16
+Trial: 17 Reward: 7 Buffer Size: 931367 Learning rate: 0.001 Batch Size: 64 Gamma: 0.95 Tau: 0.05 Seed: 984 Net Arch: [71, 40] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.1086623913096575 Exploration initial eps: 0.2336078957311376 Exploration final eps: 0.1592282191064032
+Score: 8.96 for trail number 17
+Trial: 18 Reward: 6 Buffer Size: 814374 Learning rate: 0.001 Batch Size: 32 Gamma: 0.95 Tau: 0.05 Seed: 211 Net Arch: [50, 50, 50] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.5521946429208937 Exploration initial eps: 0.3120873231722 Exploration final eps: 0.26092765200560114
+Score: 7.7 for trail number 18
+Trial: 19 Reward: 11 Buffer Size: 708718 Learning rate: 0.001 Batch Size: 256 Gamma: 0.95 Tau: 1 Seed: 7 Net Arch: [256, 256] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.5998499664991961 Exploration initial eps: 0.1659306030265774 Exploration final eps: 0.3597358221448371
+Score: -2.92 for trail number 19
+Trial: 20 Reward: 7 Buffer Size: 946055 Learning rate: 0.001 Batch Size: 640 Gamma: 0.95 Tau: 0.005 Seed: 608 Net Arch: [256, 256] Activation function: <class 'torch.nn.modules.activation.LeakyReLU'> Exploration fraction: 0.37235518439332216 Exploration initial eps: 0.1876872729340116 Exploration final eps: 0.27819238671203883
+Score: 7.42 for trail number 20
+Trial: 21 Reward: 7 Buffer Size: 835570 Learning rate: 0.001 Batch Size: 512 Gamma: 0.95 Tau: 0.05 Seed: 886 Net Arch: [256, 256] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.2760373474026327 Exploration initial eps: 0.3398949979733004 Exploration final eps: 0.2224268071795709
+Score: 9.18 for trail number 21
+Trial: 22 Reward: 7 Buffer Size: 775045 Learning rate: 0.0001 Batch Size: 64 Gamma: 0.95 Tau: 0.05 Seed: 614 Net Arch: [256, 256] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.3556094913627856 Exploration initial eps: 0.41039768465295084 Exploration final eps: 0.22704046796261076
+Score: 15.25 for trail number 22
+Trial: 23 Reward: 7 Buffer Size: 738081 Learning rate: 0.0001 Batch Size: 64 Gamma: 0.95 Tau: 0.05 Seed: 652 Net Arch: [256, 256] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.3845464376113472 Exploration initial eps: 0.4693146399703934 Exploration final eps: 0.2549433640646169
+Score: 16.26 for trail number 23
+Trial: 24 Reward: 7 Buffer Size: 942913 Learning rate: 0.001 Batch Size: 64 Gamma: 0.95 Tau: 0.05 Seed: 107 Net Arch: [256, 256] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.4259382550875098 Exploration initial eps: 0.2108064268372789 Exploration final eps: 0.19840297817287858
+Score: 8.72 for trail number 24
+Trial: 25 Reward: 7 Buffer Size: 667446 Learning rate: 0.001 Batch Size: 64 Gamma: 0.95 Tau: 0.05 Seed: 305 Net Arch: [256, 256] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.2945714891870287 Exploration initial eps: 0.31606069950338567 Exploration final eps: 0.13155367177163965
+Score: 12.76 for trail number 25
+Trial: 26 Reward: 7 Buffer Size: 785324 Learning rate: 0.001 Batch Size: 64 Gamma: 0.95 Tau: 0.05 Seed: 553 Net Arch: [71, 40] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.34492052664150213 Exploration initial eps: 0.4767730060403787 Exploration final eps: 0.31557017253772773
+Score: 10.94 for trail number 26
+Trial: 27 Reward: 6 Buffer Size: 906635 Learning rate: 0.001 Batch Size: 360 Gamma: 0.99 Tau: 0.05 Seed: 884 Net Arch: [256, 200, 160, 110, 70] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.25144862513071586 Exploration initial eps: 0.17375174652711425 Exploration final eps: 0.18879267803833122
+Score: 6.37 for trail number 27
+Trial: 28 Reward: 8 Buffer Size: 839053 Learning rate: 0.001 Batch Size: 64 Gamma: 0.95 Tau: 0.05 Seed: 232 Net Arch: [200, 160, 110, 70] Activation function: <class 'torch.nn.modules.activation.LeakyReLU'> Exploration fraction: 0.5013331995509216 Exploration initial eps: 0.10018045080682808 Exploration final eps: 0.2595210176772222
+Score: -19.21 for trail number 28
+Trial: 29 Reward: 11 Buffer Size: 765598 Learning rate: 0.001 Batch Size: 640 Gamma: 0.95 Tau: 1 Seed: 705 Net Arch: [50, 50, 50] Activation function: <class 'torch.nn.modules.activation.Sigmoid'> Exploration fraction: 0.3983679397277226 Exploration initial eps: 0.37631122368791736 Exploration final eps: 0.15288352077185785
+Score: -2.4 for trail number 29
+Trial: 30 Reward: 11 Buffer Size: 689934 Learning rate: 0.001 Batch Size: 512 Gamma: 0.95 Tau: 0.005 Seed: 399 Net Arch: [200, 160, 110, 70] Activation function: <class 'torch.nn.modules.activation.LeakyReLU'> Exploration fraction: 0.23137728588273543 Exploration initial eps: 0.2809252563126993 Exploration final eps: 0.2993280023049021
+Score: -3.14 for trail number 30
+Trial: 31 Reward: 7 Buffer Size: 503472 Learning rate: 0.001 Batch Size: 120 Gamma: 0.95 Tau: 1 Seed: 552 Net Arch: [256, 256] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.31362954962175893 Exploration initial eps: 0.2781373608250265 Exploration final eps: 0.32494893925370383
+Score: 7.52 for trail number 31
+Trial: 32 Reward: 7 Buffer Size: 810673 Learning rate: 0.0001 Batch Size: 64 Gamma: 0.95 Tau: 0.05 Seed: 980 Net Arch: [256, 256] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.7408998053323173 Exploration initial eps: 0.26450052743740676 Exploration final eps: 0.21572204416894705
+Score: 16.87 for trail number 32
+Trial: 33 Reward: 7 Buffer Size: 719820 Learning rate: 0.001 Batch Size: 64 Gamma: 0.95 Tau: 0.05 Seed: 924 Net Arch: [256, 256] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.64803961936341 Exploration initial eps: 0.21264242748008605 Exploration final eps: 0.24065443975380388
+Score: 7.65 for trail number 33
+Trial: 34 Reward: 7 Buffer Size: 792839 Learning rate: 0.001 Batch Size: 128 Gamma: 0.95 Tau: 0.05 Seed: 837 Net Arch: [256, 256] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.46370065150872064 Exploration initial eps: 0.19651398473915876 Exploration final eps: 0.2818379843060337
+Score: 9.85 for trail number 34
+Trial: 35 Reward: 6 Buffer Size: 835233 Learning rate: 0.001 Batch Size: 64 Gamma: 0.99 Tau: 0.05 Seed: 933 Net Arch: [50, 50, 50] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.3973065725914399 Exploration initial eps: 0.15146801990071113 Exploration final eps: 0.20877498072168554
+Score: 8.27 for trail number 35
+Trial: 36 Reward: 7 Buffer Size: 881366 Learning rate: 0.001 Batch Size: 32 Gamma: 0.95 Tau: 0.05 Seed: 805 Net Arch: [256, 200, 160, 110, 70] Activation function: <class 'torch.nn.modules.activation.Softmax'> Exploration fraction: 0.1442848274547141 Exploration initial eps: 0.25313650020409384 Exploration final eps: 0.24170768200333295
+Score: 2.79 for trail number 36
+Trial: 37 Reward: 7 Buffer Size: 971895 Learning rate: 0.001 Batch Size: 64 Gamma: 0.95 Tau: 0.005 Seed: 95 Net Arch: [256, 256] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.17239929633877565 Exploration initial eps: 0.3465066545711516 Exploration final eps: 0.29246458088724286
+Score: 9.17 for trail number 37
+Trial: 38 Reward: 7 Buffer Size: 908245 Learning rate: 0.001 Batch Size: 256 Gamma: 0.99 Tau: 0.05 Seed: 859 Net Arch: [32, 32] Activation function: <class 'torch.nn.modules.activation.Sigmoid'> Exploration fraction: 0.34288419260811626 Exploration initial eps: 0.5159264997975648 Exploration final eps: 0.35421112439640867
+Score: 12.33 for trail number 38
+Trial: 39 Reward: 8 Buffer Size: 662278 Learning rate: 0.001 Batch Size: 360 Gamma: 0.95 Tau: 1 Seed: 934 Net Arch: [256, 256] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.21929305273401933 Exploration initial eps: 0.3802589222794343 Exploration final eps: 0.18400494375385684
+Score: -24.06 for trail number 39
+Trial: 40 Reward: 6 Buffer Size: 807002 Learning rate: 0.001 Batch Size: 128 Gamma: 0.99 Tau: 0.05 Seed: 1000 Net Arch: [71, 40] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.2782137072325638 Exploration initial eps: 0.6353868619722589 Exploration final eps: 0.22391762967768514
+Score: 8.6 for trail number 40
+Trial: 41 Reward: 7 Buffer Size: 755854 Learning rate: 0.001 Batch Size: 120 Gamma: 0.95 Tau: 0.005 Seed: 454 Net Arch: [256, 200, 160, 110, 70] Activation function: <class 'torch.nn.modules.activation.LeakyReLU'> Exploration fraction: 0.1940785909796302 Exploration initial eps: 0.29719405322026554 Exploration final eps: 0.27047238045858113
+Score: 8.89 for trail number 41
+Trial: 42 Reward: 7 Buffer Size: 813076 Learning rate: 0.0001 Batch Size: 64 Gamma: 0.95 Tau: 0.05 Seed: 969 Net Arch: [256, 256] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.7165351691127642 Exploration initial eps: 0.25535211644644884 Exploration final eps: 0.20307993646547362
+Score: 17.42 for trail number 42
+Trial: 43 Reward: 7 Buffer Size: 869495 Learning rate: 0.0001 Batch Size: 64 Gamma: 0.95 Tau: 0.05 Seed: 934 Net Arch: [256, 256] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.7210038445661688 Exploration initial eps: 0.22000809072900898 Exploration final eps: 0.19990709583510247
+Score: 20.57 for trail number 43
+Trial: 44 Reward: 7 Buffer Size: 866601 Learning rate: 0.001 Batch Size: 64 Gamma: 0.95 Tau: 0.05 Seed: 759 Net Arch: [256, 256] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.8112260407946259 Exploration initial eps: 0.15451034613466197 Exploration final eps: 0.24062906967208184
+Score: 10.02 for trail number 44
+Trial: 45 Reward: 7 Buffer Size: 849906 Learning rate: 0.001 Batch Size: 512 Gamma: 0.95 Tau: 0.05 Seed: 925 Net Arch: [32, 32] Activation function: <class 'torch.nn.modules.activation.Sigmoid'> Exploration fraction: 0.5362452187598907 Exploration initial eps: 0.19842952015472673 Exploration final eps: 0.16585049072438976
+Score: 12.05 for trail number 45
+Trial: 46 Reward: 7 Buffer Size: 886767 Learning rate: 1e-05 Batch Size: 360 Gamma: 0.95 Tau: 0.05 Seed: 801 Net Arch: [256, 256] Activation function: <class 'torch.nn.modules.activation.Softmax'> Exploration fraction: 0.6276776920503527 Exploration initial eps: 0.12836671234749422 Exploration final eps: 0.17528822851188852
+Score: 1.82 for trail number 46
+Trial: 47 Reward: 11 Buffer Size: 923240 Learning rate: 0.001 Batch Size: 64 Gamma: 0.95 Tau: 0.05 Seed: 349 Net Arch: [200, 160, 110, 70] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.6900503747155817 Exploration initial eps: 0.21498017654214963 Exploration final eps: 0.13821901970125472
+Score: -2.46 for trail number 47
+Trial: 48 Reward: 8 Buffer Size: 959998 Learning rate: 0.001 Batch Size: 32 Gamma: 0.99 Tau: 0.05 Seed: 715 Net Arch: [256, 256] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.4606955352876665 Exploration initial eps: 0.23851506703417444 Exploration final eps: 0.11077177451313314
+Score: -24.15 for trail number 48
+Trial: 49 Reward: 7 Buffer Size: 738961 Learning rate: 0.001 Batch Size: 640 Gamma: 0.95 Tau: 1 Seed: 881 Net Arch: [256, 256] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.5821735270107082 Exploration initial eps: 0.14434909128228723 Exploration final eps: 0.19440589240514344
+Score: 8.82 for trail number 49
+Trial: 50 Reward: 7 Buffer Size: 869190 Learning rate: 0.001 Batch Size: 256 Gamma: 0.95 Tau: 0.05 Seed: 505 Net Arch: [50, 50, 50] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.5290696495619005 Exploration initial eps: 0.17616358714307367 Exploration final eps: 0.2358891585039721
+Score: 11.89 for trail number 50
