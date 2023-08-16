@@ -1,6 +1,6 @@
 # Dissertation
 
-## 📁 Decription of Folder's Content
+## 📁 Decription of Folder and File Content
 
 1. <a href="https://github.com/Sonali2824/Dissertation/tree/main/DQN%20COMPARITATIVE%20STUDY"> <b>DQN COMPARITIVE STUDY</b></a>
 : Code used to extensively train a DQN Agent across 10 million timesteps and comapred with the SAC agent.
@@ -17,5 +17,7 @@
 : Code to generate the Tetris enviornment.
     - Any change to the Tetris enviornment has to be made to file <a href="https://github.com/Sonali2824/Dissertation/blob/main/gym-examples/gym_examples/envs/tetris_high_state_space.py"> <b>TETRIS ENVIORNMENT .py FILE</b></a>
     - Gymnasium environment is coded in accordance to the example given on <a href="https://github.com/Farama-Foundation/gym-examples">Gym Examples</a>
+
+6. To procure the logs related to Q-values the following file has to replace the original stable-baselines3 ```dqn.py``` file : <a href="https://github.com/Sonali2824/Dissertation/blob/main/stable_baselines_3_modified_dqn_code.py"><b>dqn.py</b></a>
    
 
