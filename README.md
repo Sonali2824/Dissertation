@@ -19,5 +19,17 @@
     - Gymnasium environment is coded in accordance to the example given on <a href="https://github.com/Farama-Foundation/gym-examples">Gym Examples</a>
 
 6. To procure the logs related to Q-values the following file has to replace the original stable-baselines3 ```dqn.py``` file : <a href="https://github.com/Sonali2824/Dissertation/blob/main/stable_baselines_3_modified_dqn_code.py"><b>dqn.py</b></a>
-   
+
+
+
+## ⚙️ Running the code
+
+```sh
+# Training/Evaluating Agent
+python <training/evaluating.py>
+
+
+# You can also  visualise the learning curves via TensorBoard
+tensorboard --logdir <exp_name> # exp_name refers to the log directory
+```
 
