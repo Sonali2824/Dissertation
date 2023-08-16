@@ -25,6 +25,11 @@
 ## ⚙️ Running the code
 
 ```sh
+
+# After any change made to the Tetris Enviornment follow these steps
+cd gym-examples
+pip install -e .
+
 # Training/Evaluating Agent
 python <training/evaluating.py>
 
