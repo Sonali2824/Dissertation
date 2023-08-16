@@ -19,7 +19,7 @@ import gym_examples
 
 # Function to Write Parameteric Values to Text File for Each Trial
 def write_to_file(word):
-    with open("unmasked_dqn_10_x_10_50_30k.txt", "a") as file:
+    with open("masked_binary_30k_10_10.txt", "a") as file:
         file.write(word +"\n")
 
 # Check if a GPU is available
@@ -172,87 +172,112 @@ class StopTrainingOnMaxEpisodes(BaseCallback):
         plt.title('Lines Cleared vs Timestep')
         plt.grid(True)
         return plt.gcf()
-   
+
+
 # Creating the Callback
 callback = StopTrainingOnMaxEpisodes(30000)
 
-# Defining the Objective to be Maximised
-def objective(trial):
-    global trial_number
-    trial_number += 1
+# Inheriting the DQN Class to Incorporate Masking Actions
+class MaskedDQN(DQN):
+    def predict(
+        self,
+        observation: Union[np.ndarray, Dict[str, np.ndarray]],
+        state: Optional[Tuple[np.ndarray, ...]] = None,
+        episode_start: Optional[np.ndarray] = None,
+        deterministic: bool = False,
+    ) -> Tuple[np.ndarray, Optional[Tuple[np.ndarray, ...]]]:
+        """
+        Overrides the base_class predict function to include epsilon-greedy exploration.
 
-    # Defining the hyperparameter search space
-    reward_t = trial.suggest_categorical('reward_type', [6, 7, 8, 11])
-    buffer_size = trial.suggest_int('buffer_size', 500000, 1000000)
-    learning_rate = trial.suggest_categorical('learning_rate', [0.0003, 0.001, 1e-5, 1e-4, 2e-6, 1e-3])
-    batch_size = trial.suggest_categorical('batch_size', [32, 64, 256, 640, 120, 360, 128, 512])
-    gamma = trial.suggest_categorical('gamma', [0.95, 0.99])
-    tau = trial.suggest_categorical('tau', [1, 0.005, 0.05])
-    seed = trial.suggest_int('seed', 1, 1000)
-    exploration_fraction = trial.suggest_float("exploration_fraction", 0.1, 0.9)
-    exploration_initial_eps = trial.suggest_float("exploration_initial_eps", 0.1, 1.0)
-    exploration_final_eps = trial.suggest_float("exploration_final_eps", 0.01, 0.5)
-    net_arch = trial.suggest_categorical('net_arch', [[256, 256], [32, 32], [50, 50, 50], [256, 200, 160, 110, 70], [200, 160, 110, 70], [71, 40]])
-    activation_fn_name = trial.suggest_categorical('activation_fn_name', ["ReLU", "LeakyReLU", "Sigmoid", "Softmax"])
+        :param observation: the input observation
+        :param state: The last states (can be None, used in recurrent policies)
+        :param episode_start: The last masks (can be None, used in recurrent policies)
+        :param deterministic: Whether or not to return deterministic actions.
+        :return: the model's action and the next state
+            (used in recurrent policies)
+        """
+        if not deterministic and np.random.rand() < self.exploration_rate:
+            if self.policy.is_vectorized_observation(observation):
+                if isinstance(observation, dict):
+                    n_batch = observation[list(observation.keys())[0]].shape[0]
+                else:
+                    n_batch = observation.shape[0]
+                _, masks, _ = self.env.envs[0].get_next_states()
+                action = np.array([self.action_space.sample(masks) for _ in range(n_batch)])
+                #print("PREDICT", action, masks)
+            else:
+                _, masks, _ = self.env.envs[0].get_next_states()
+                action = np.array(self.action_space.sample(masks))
+                #print("PREDICT-1", action, masks)
+        else:
+            action, state = self.policy.predict(observation, state, episode_start, deterministic)
+        return action, state
+    
+    def _sample_action(
+        self,
+        learning_starts: int,
+        action_noise: Optional[ActionNoise] = None,
+        n_envs: int = 1,
+    ) -> Tuple[np.ndarray, np.ndarray]:
+        """
+        Sample an action according to the exploration policy.
+        This is either done by sampling the probability distribution of the policy,
+        or sampling a random action (from a uniform distribution over the action space)
+        or by adding noise to the deterministic output.
 
-    if activation_fn_name == "ReLU":
-        activation_fn = nn.ReLU
-    elif activation_fn_name == "LeakyReLU":
-        activation_fn = nn.LeakyReLU
-    elif activation_fn_name == "Sigmoid":
-        activation_fn = nn.Sigmoid
-    elif activation_fn_name == "Softmax":
-        activation_fn = nn.Softmax
+        :param action_noise: Action noise that will be used for exploration
+            Required for deterministic policy (e.g. TD3). This can also be used
+            in addition to the stochastic policy for SAC.
+        :param learning_starts: Number of steps before learning for the warm-up phase.
+        :param n_envs:
+        :return: action to take in the environment
+            and scaled action that will be stored in the replay buffer.
+            The two differs when the action space is not normalized (bounds are not [-1, 1]).
+        """
+        # Select action randomly or according to policy
+        if self.num_timesteps < learning_starts and not (self.use_sde and self.use_sde_at_warmup):
+            # Warmup phase 
+            _, masks, _ = self.env.envs[0].get_next_states()
+            unscaled_action = np.array([self.action_space.sample(masks) for _ in range(n_envs)])
+            #print("unscaled action", unscaled_action, masks)
+        else:
+            # Note: when using continuous actions,
+            # we assume that the policy uses tanh to scale the action
+            # We use non-deterministic action in the case of SAC, for TD3, it does not matter
+            unscaled_action, _ = self.predict(self._last_obs, deterministic=False)
 
-    class CustomDQNMlpPolicy(DQNPolicy):
-        def __init__(self, *args, net_arch=net_arch, activation_fn=activation_fn, **kwargs):
-            super(CustomDQNMlpPolicy, self).__init__(*args, net_arch=net_arch, activation_fn=activation_fn, **kwargs)
+        # Rescale the action from [low, high] to [-1, 1]
+        if isinstance(self.action_space, spaces.Box):
+            scaled_action = self.policy.scale_action(unscaled_action)
 
-    # Create and wrap the gym environment
-    env = gym.make("gym_examples/Tetris-Binary-v0", width = 10, height = 10, reward_type = reward_t) # Can be Changed to 10x20 Configuration
+            # Add noise to the action (improve exploration)
+            if action_noise is not None:
+                scaled_action = np.clip(scaled_action + action_noise(), -1, 1)
 
-    text = "Trial: " + str(trial_number) + " Reward: " + str(reward_t) + " Buffer Size: " + str(buffer_size) + " Learning rate: " + str(learning_rate) + " Batch Size: " + str(batch_size) + " Gamma: " +str(gamma) + " Tau: " + str(tau) + " Seed: " + str(seed) + " Net Arch: " + str(net_arch) + " Activation function: " +str(activation_fn) + " Exploration fraction: " + str(exploration_fraction) + " Exploration initial eps: "+str(exploration_initial_eps) + " Exploration final eps: "+ str(exploration_final_eps) 
-    write_to_file(text)
+            # We store the scaled action in the buffer
+            buffer_action = scaled_action
+            action = self.policy.unscale_action(scaled_action)
+        else:
+            # Discrete case, no need to normalize or clip
+            buffer_action = unscaled_action
+            action = buffer_action
+        return action, buffer_action
 
-    # Create the DQN agent
-    model = DQN(
-        CustomDQNMlpPolicy,
-        env,
-        buffer_size=buffer_size,
-        learning_rate=learning_rate,
-        batch_size=batch_size,
-        gamma=gamma,
-        tau=tau,
-        seed=seed,
-        verbose=1,
-        tensorboard_log='unmasked_dqn_10_x_10_50_30k/',
-        device=device,
-        exploration_fraction=exploration_fraction,
-        exploration_initial_eps=exploration_initial_eps,
-        exploration_final_eps=exploration_final_eps
-    )
+# Running Each Agent with One Reward Thrice --Masked Actions
+rew = list(range(1, 12))
+for i in rew:
+    for j in range(1, 4):
 
-    # Train the agent
-    model.learn(total_timesteps=1000000000000000, callback=callback)
+        # Create your Tetris environment
+        env = gym.make("gym_examples/Tetris-Binary-v0", width = 10, height = 10, reward_type = i)
 
-    # Evaluate the agent
-    mean_reward, _ = evaluate_policy(model, env, n_eval_episodes=100)
-    text = "Score: " + str(mean_reward) + " for trail number " + str(trial_number)
-    write_to_file(text)
+        # Create the Masked DQN agent
+        model = MaskedDQN('MlpPolicy', env, verbose=1, tensorboard_log='masked_binary_30k_10_10/')
 
-    # Return the mean reward as Optuna aims to maximise the objective
-    return mean_reward
+        # Train the agent
+        model.learn(total_timesteps=1000000000, callback=callback) 
 
-if __name__ == "__main__":
-    trial_number = 0
-    study = optuna.create_study(direction='maximize',
-                                storage="sqlite:///db_unmasked_dqn_10_x_10_50_30k.sqlite3",  # Specifying the storage URL to Store Tuning Results
-                                study_name="DQN-10-Tetris-Unmasked-50")
-    study.optimize(objective, n_trials=50) 
+        model.save("masked_binary_30k_10_10_"+str(i)+"_"+str(j)+".zip")
 
-    print('Best trial:')
-    best_trial = study.best_trial
-    print('  Value: {}'.format(best_trial.value))
-    print('  Params: ')
-    for key, value in best_trial.params.items():
-        print('    {}: {}'.format(key, value))
+        word_loop = "Done: " + str(i) + " " + str(j)
+        write_to_file(word_loop)

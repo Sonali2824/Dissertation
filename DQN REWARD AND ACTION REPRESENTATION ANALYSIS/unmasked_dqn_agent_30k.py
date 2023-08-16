@@ -19,7 +19,7 @@ import gym_examples
 
 # Function to Write Parameteric Values to Text File for Each Trial
 def write_to_file(word):
-    with open("unmasked_dqn_10_x_10_50_30k.txt", "a") as file:
+    with open("unmasked_binary_30k_10_10.txt", "a") as file:
         file.write(word +"\n")
 
 # Check if a GPU is available
@@ -172,87 +172,26 @@ class StopTrainingOnMaxEpisodes(BaseCallback):
         plt.title('Lines Cleared vs Timestep')
         plt.grid(True)
         return plt.gcf()
-   
+
+
 # Creating the Callback
 callback = StopTrainingOnMaxEpisodes(30000)
 
-# Defining the Objective to be Maximised
-def objective(trial):
-    global trial_number
-    trial_number += 1
+# Running Each Agent with One Reward Thrice --Unmasked Actions
+rew = list(range(1, 12))
+for i in rew:
+    for j in range(1, 4):
 
-    # Defining the hyperparameter search space
-    reward_t = trial.suggest_categorical('reward_type', [6, 7, 8, 11])
-    buffer_size = trial.suggest_int('buffer_size', 500000, 1000000)
-    learning_rate = trial.suggest_categorical('learning_rate', [0.0003, 0.001, 1e-5, 1e-4, 2e-6, 1e-3])
-    batch_size = trial.suggest_categorical('batch_size', [32, 64, 256, 640, 120, 360, 128, 512])
-    gamma = trial.suggest_categorical('gamma', [0.95, 0.99])
-    tau = trial.suggest_categorical('tau', [1, 0.005, 0.05])
-    seed = trial.suggest_int('seed', 1, 1000)
-    exploration_fraction = trial.suggest_float("exploration_fraction", 0.1, 0.9)
-    exploration_initial_eps = trial.suggest_float("exploration_initial_eps", 0.1, 1.0)
-    exploration_final_eps = trial.suggest_float("exploration_final_eps", 0.01, 0.5)
-    net_arch = trial.suggest_categorical('net_arch', [[256, 256], [32, 32], [50, 50, 50], [256, 200, 160, 110, 70], [200, 160, 110, 70], [71, 40]])
-    activation_fn_name = trial.suggest_categorical('activation_fn_name', ["ReLU", "LeakyReLU", "Sigmoid", "Softmax"])
+        # Create your Tetris environment
+        env = gym.make("gym_examples/Tetris-Binary-v0", width = 10, height = 10, reward_type = i)
 
-    if activation_fn_name == "ReLU":
-        activation_fn = nn.ReLU
-    elif activation_fn_name == "LeakyReLU":
-        activation_fn = nn.LeakyReLU
-    elif activation_fn_name == "Sigmoid":
-        activation_fn = nn.Sigmoid
-    elif activation_fn_name == "Softmax":
-        activation_fn = nn.Softmax
+        # Create the DQN agent
+        model = DQN('MlpPolicy', env, verbose=1, tensorboard_log='unmasked_binary_30k_10_10/')
 
-    class CustomDQNMlpPolicy(DQNPolicy):
-        def __init__(self, *args, net_arch=net_arch, activation_fn=activation_fn, **kwargs):
-            super(CustomDQNMlpPolicy, self).__init__(*args, net_arch=net_arch, activation_fn=activation_fn, **kwargs)
+        # Train the agent
+        model.learn(total_timesteps=1000000000, callback=callback) 
 
-    # Create and wrap the gym environment
-    env = gym.make("gym_examples/Tetris-Binary-v0", width = 10, height = 10, reward_type = reward_t) # Can be Changed to 10x20 Configuration
+        model.save("unmasked_binary_30k_10_10_"+str(i)+"_"+str(j)+".zip")
 
-    text = "Trial: " + str(trial_number) + " Reward: " + str(reward_t) + " Buffer Size: " + str(buffer_size) + " Learning rate: " + str(learning_rate) + " Batch Size: " + str(batch_size) + " Gamma: " +str(gamma) + " Tau: " + str(tau) + " Seed: " + str(seed) + " Net Arch: " + str(net_arch) + " Activation function: " +str(activation_fn) + " Exploration fraction: " + str(exploration_fraction) + " Exploration initial eps: "+str(exploration_initial_eps) + " Exploration final eps: "+ str(exploration_final_eps) 
-    write_to_file(text)
-
-    # Create the DQN agent
-    model = DQN(
-        CustomDQNMlpPolicy,
-        env,
-        buffer_size=buffer_size,
-        learning_rate=learning_rate,
-        batch_size=batch_size,
-        gamma=gamma,
-        tau=tau,
-        seed=seed,
-        verbose=1,
-        tensorboard_log='unmasked_dqn_10_x_10_50_30k/',
-        device=device,
-        exploration_fraction=exploration_fraction,
-        exploration_initial_eps=exploration_initial_eps,
-        exploration_final_eps=exploration_final_eps
-    )
-
-    # Train the agent
-    model.learn(total_timesteps=1000000000000000, callback=callback)
-
-    # Evaluate the agent
-    mean_reward, _ = evaluate_policy(model, env, n_eval_episodes=100)
-    text = "Score: " + str(mean_reward) + " for trail number " + str(trial_number)
-    write_to_file(text)
-
-    # Return the mean reward as Optuna aims to maximise the objective
-    return mean_reward
-
-if __name__ == "__main__":
-    trial_number = 0
-    study = optuna.create_study(direction='maximize',
-                                storage="sqlite:///db_unmasked_dqn_10_x_10_50_30k.sqlite3",  # Specifying the storage URL to Store Tuning Results
-                                study_name="DQN-10-Tetris-Unmasked-50")
-    study.optimize(objective, n_trials=50) 
-
-    print('Best trial:')
-    best_trial = study.best_trial
-    print('  Value: {}'.format(best_trial.value))
-    print('  Params: ')
-    for key, value in best_trial.params.items():
-        print('    {}: {}'.format(key, value))
+        word_loop = "Done: " + str(i) + " " + str(j)
+        write_to_file(word_loop)
