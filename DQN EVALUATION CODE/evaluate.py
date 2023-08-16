@@ -8,10 +8,11 @@ from stable_baselines3.common.noise import ActionNoise, VectorizedActionNoise
 from gymnasium import spaces
 import numpy as np
 import time
+from tensorboardX import SummaryWriter
 
 # Function to Write Evaluation Results
 def write_to_file(word):
-    with open("masked_compare_30k_re.txt", "a") as file:
+    with open("unmasked_binary_evaluation_20.txt", "a") as file:
         file.write(word +"\n")
 
 # Inheriting the DQN Class to Incorporate Masking Actions
@@ -101,70 +102,77 @@ class MaskedDQN(DQN):
         return action, buffer_action
 
 # Iterating over all 11 Rewards
-for i in range(1, 10):
-    text = "Reward: " + str(i)
-    write_to_file(text)
-    
-    # Setting Model Names
-    model_filename = "masked_binary_30k_re_" + str(i) + "_1.zip"
+for i in range(1, 12):
+    for j in range(1, 2):
+        text = "Reward: " + str(i)
+        write_to_file(text)
 
-    # Load the DQN model from the saved file
-    model = MaskedDQN.load(model_filename) # Use DQN if Unmasked Case
+        # Settting Model Files
+        model_filename = "unmasked_20/unmasked_binary_30k_20_" + str(i) + "_" +str(j) +".zip"
+        logdir = "unmasked_dqn_"+ str(i) + "_" +str(j)
+        writer = SummaryWriter(log_dir = logdir)
 
-    # Create your Tetris environment
-    env = gym.make("gym_examples/Tetris-Binary-v0", width = 10, height = 10, reward_type = i) # Can be changed to 10x20
+        # Load the DQN model from the saved file
+        model = DQN.load(model_filename) # Use MaskedDQN for the Masked Version
 
-    # Define a function to record the environment
-    def record_environment(env, model, num_episodes=50):
-        for episode in range(num_episodes):
-            obs, _ = env.reset()
-            done = False
-            episode_reward = 0
-            cleared_lines = 0
-            actions = []
-            ep_len = 0
-            while not done:
-                action, _ = model.predict(obs, deterministic=True)
-                obs, reward, done, _, info = env.step(action)
-                actions.append(str(action))
-                #env.render()
-                #time.sleep(2)
-                episode_reward += reward
-                cleared_lines += info["cleared_lines"]
-                ep_len += 1
-            #print("Episode", episode, episode_reward, cleared_lines)
-            list_as_string = ",".join(str(item) for item in actions)
-            text = "Episode: " + str(episode) + " Reward: " +str(episode_reward) +" Cleared: " +str(cleared_lines) + " Actions: " + list_as_string + " Length: " +str(ep_len)
+        # Create your Tetris environment
+        env = gym.make("gym_examples/Tetris-Binary-v0", width = 10, height = 10, reward_type = i) # Can be changed to 10x20 Version
+
+        # Define a function to record the environment
+        def record_environment(env, model, num_episodes=500):
+            for episode in range(num_episodes):
+                obs, _ = env.reset()
+                done = False
+                episode_reward = 0
+                cleared_lines = 0
+                actions = []
+                ep_len = 0
+                while not done:
+                    action, _ = model.predict(obs, deterministic=True)
+                    obs, reward, done, _, info = env.step(action)
+                    actions.append(str(action))
+                    #env.render()
+                    #time.sleep(2)
+                    episode_reward += reward
+                    cleared_lines += info["cleared_lines"]
+                    ep_len += 1
+                #print("Episode", episode, episode_reward, cleared_lines)
+                list_as_string = ",".join(str(item) for item in actions)
+                text = "Episode: " + str(episode) + " Reward: " +str(episode_reward) +" Cleared: " +str(cleared_lines) + " Actions: " + list_as_string + " Length: " +str(ep_len)
+                writer.add_scalar("episode/total_reward", episode_reward, episode)
+                writer.add_scalar("episode/total_len", ep_len, episode)
+                writer.add_scalar("episode/lines_cleared_plot", (cleared_lines), episode)
+                writer.add_scalar("episode/average_lines_cleared_plot", np.mean(cleared_lines), episode)
+                write_to_file(text)
+            env.close()
+
+        # Record the environment using the loaded model
+        record_environment(env, model)
+
+        # Evaluate the performance of the model
+        def evaluate_model(env, model, num_episodes=100):
+            rewards = []
+            lines = []
+            for episode in range(num_episodes):
+                obs, _ = env.reset()
+                done = False
+                episode_reward = 0
+                cleared_lines = 0
+                while not done:
+                    action, _ = model.predict(obs, deterministic=True)
+                    obs, reward, done, _, info = env.step(action)
+                    episode_reward += reward
+                    cleared_lines += info["cleared_lines"]
+                rewards.append(episode_reward)
+                lines.append(cleared_lines)
+            average_reward = sum(rewards) / num_episodes
+            average_lines = sum(lines) / num_episodes
+            text = "Average reward over 100 episodes " + str(average_reward)
             write_to_file(text)
-        env.close()
+            text = "Average lines over 100 episodes " + str(average_lines)
+            write_to_file(text)
+            print("Average reward over {} episodes: {:.2f}".format(num_episodes, average_reward))
+            print("Average lines over {} episodes: {:.2f}".format(num_episodes, average_lines))
 
-    # Record the environment using the loaded model
-    record_environment(env, model)
-
-    # Evaluate the performance of the model
-    def evaluate_model(env, model, num_episodes=100):
-        rewards = []
-        lines = []
-        for episode in range(num_episodes):
-            obs, _ = env.reset()
-            done = False
-            episode_reward = 0
-            cleared_lines = 0
-            while not done:
-                action, _ = model.predict(obs, deterministic=True)
-                obs, reward, done, _, info = env.step(action)
-                episode_reward += reward
-                cleared_lines += info["cleared_lines"]
-            rewards.append(episode_reward)
-            lines.append(cleared_lines)
-        average_reward = sum(rewards) / num_episodes
-        average_lines = sum(lines) / num_episodes
-        text = "Average reward over 100 episodes " + str(average_reward)
-        write_to_file(text)
-        text = "Average lines over 100 episodes " + str(average_lines)
-        write_to_file(text)
-        print("Average reward over {} episodes: {:.2f}".format(num_episodes, average_reward))
-        print("Average lines over {} episodes: {:.2f}".format(num_episodes, average_lines))
-
-    # Evaluate the loaded model
-    evaluate_model(env, model)
+        # Evaluate the loaded model
+        evaluate_model(env, model)
