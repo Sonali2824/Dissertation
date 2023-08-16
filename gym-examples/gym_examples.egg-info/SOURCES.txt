@@ -8,7 +8,6 @@ gym_examples.egg-info/requires.txt
 gym_examples.egg-info/top_level.txt
 gym_examples/envs/__init__.py
 gym_examples/envs/rewards.py
-gym_examples/envs/tetris_binary.py
 gym_examples/envs/tetris_high_state_space.py
 gym_examples/wrappers/__init__.py
 gym_examples/wrappers/clip_reward.py
