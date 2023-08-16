@@ -13,6 +13,9 @@
 4. <a href="https://github.com/Sonali2824/Dissertation/tree/main/RANDOM%20AGENT"> <b>RANDOM AGENT</b></a>
 : Code used to generate masked and unmasked random agents.
 
-5. <a href="https://github.com/Sonali2824/Dissertation/tree/main/RANDOM%20AGENT"> <b>gym-examples</b></a>
+5. <a href="https://github.com/Sonali2824/Dissertation/tree/main/gym-examples"> <b>gym-examples</b></a>
 : Code to generate the Tetris enviornment.
+    - Any change to the Tetris enviornment has to be made to file <a href="https://github.com/Sonali2824/Dissertation/blob/main/gym-examples/gym_examples/envs/tetris_high_state_space.py"> <b>TETRIS ENVIORNMENT .py FILE</b></a>
+    - Gymnasium environment is coded in accordance to the example given on <a href="https://github.com/Farama-Foundation/gym-examples">Gym Examples</a>
+   
 
