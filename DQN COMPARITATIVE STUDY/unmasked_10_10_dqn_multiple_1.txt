@@ -1,2 +1,0 @@
-cpu
-Trial: 1 Reward: 7 Buffer Size: 815981 Learning rate: 0.0001 Batch Size: 64 Gamma: 0.95 Tau: 0.05 Seed: 535 Net Arch: [256, 256] Activation function: <class 'torch.nn.modules.activation.ReLU'> Exploration fraction: 0.4771606694707132 Exploration initial eps: 0.1563199107511768 Exploration final eps: 0.22082328799820772
