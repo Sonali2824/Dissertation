@@ -22,7 +22,7 @@
 
 7. <a href="https://github.com/Sonali2824/Dissertation/tree/main/DQN%20EVALUATION%20CODE"><b>DQN EVALUATION CODE</b></a>: Code used to evaluate the DQN agents.
 
-8. <a href="https://github.com/Sonali2824/Dissertation/tree/main/DQN%20EVALUATION%20CODE"><b>SAC CODE</b></a>: Code used to train, tune, and evaluate SAC agents.
+8. <a href="https://github.com/Sonali2824/Dissertation/tree/main/SAC"><b>SAC CODE</b></a>: Code used to train, tune, and evaluate SAC agents.
 
 ## ⚙️ Running the code
 
