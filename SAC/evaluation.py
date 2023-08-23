@@ -8,6 +8,7 @@ import gymnasium as gym
 import gym_examples
 import json
 import time
+from tensorboardX import SummaryWriter
 
 from utilities.Utility_Functions import create_actor_distribution 
 
@@ -20,7 +21,7 @@ def write_to_file(data, filename):
 
 def evaluation(config):
     print("Evaluation")
-    filename = "evaluation.txt"
+    filename = "evaluation_1.txt"
 
     config["seed"] = 1 #random.randint(1, 1000)
 
@@ -49,11 +50,15 @@ def evaluation(config):
     agent = AgentPreparation(config)
 
     # Load the state dictionary from the .pt file
-    agent.actor_local.load_state_dict(torch.load("11_3_actor_local_network.pt"))
+    agent.actor_local.load_state_dict(torch.load("6_5_actor_local_network_10_1.pt", map_location=torch.device('cpu')))
     agent.actor_local.eval()  # Set the model to evaluation mode
 
 
     print("Actor", agent.actor_local)
+
+    # Initialise the Writer        
+    logdir = "masked_sac_"+ str(1) 
+    writer = SummaryWriter(log_dir = logdir)
 
     # Create your Tetris environment
     env = gym.make("gym_examples/Tetris-Binary-v0", width = 10, height = 10, reward_type = 11)
@@ -81,11 +86,8 @@ def evaluation(config):
                 z = z.float() * 1e-8
                 log_action_probabilities = torch.log(action_probabilities + z)
 
-                if evaluation == False: 
-                    action = action
-                else:
-                    with torch.no_grad():
-                        z, action = (action_probabilities, log_action_probabilities), max_probability_action
+                with torch.no_grad():
+                    z, action = (action_probabilities, log_action_probabilities), max_probability_action
                 action = action.detach().cpu().numpy()
                 action = action[0]
                 obs, reward, done, _, info = env.step(action)
@@ -100,6 +102,11 @@ def evaluation(config):
                 length += 1
             print("Episode", episode, episode_reward, cleared_lines, length)
             text = "Episode End: " + str(episode) + " Reward: " + str(episode_reward) + " Cleared-lines: " +str(cleared_lines) + " Length: " +str(length)
+            # Log
+            writer.add_scalar("episode/total_reward", episode_reward, episode)
+            writer.add_scalar("episode/total_len", length, episode)
+            writer.add_scalar("episode/lines_cleared_plot", (cleared_lines), episode)
+            writer.add_scalar("episode/average_lines_cleared_plot", np.mean(cleared_lines), episode)
             write_to_file(text, filename)
         env.close()
 
@@ -130,11 +137,8 @@ def evaluation(config):
                 z = z.float() * 1e-8
                 log_action_probabilities = torch.log(action_probabilities + z)
 
-                if evaluation == False: 
-                    action = action
-                else:
-                    with torch.no_grad():
-                        z, action = (action_probabilities, log_action_probabilities), max_probability_action
+                with torch.no_grad():
+                    z, action = (action_probabilities, log_action_probabilities), max_probability_action
                 action = action.detach().cpu().numpy()
                 action = action[0]
                 obs, reward, done, _, info = env.step(action)

@@ -6,6 +6,7 @@ from extensive_training import extensive_training
 from hyperparameter_tuning import hyperparameter_tuning
 from extensive_config import config
 from analysis_config import analysis_config
+from evaluation_extensive import evaluation_extensive
 
 
 option = sys.argv[1] # Procuring Action to be Performed on the SAC Agent
@@ -22,5 +23,8 @@ elif option == "analysis": # Perform Analysis of Reward and Action Representatio
 
 elif option == 'evaluation': # Perform Evaluation of SAC Agents
     evaluation(config)
+
+elif option == 'evaluation_extensive': # Perform Evaluation of Extensively Trained SAC Agents
+    evaluation_extensive(config)
 
     
