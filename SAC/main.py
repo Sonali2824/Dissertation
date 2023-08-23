@@ -24,7 +24,7 @@ elif option == "analysis": # Perform Analysis of Reward and Action Representatio
 elif option == 'evaluation': # Perform Evaluation of SAC Agents
     evaluation(config)
 
-elif option == 'evaluation_extensive': # Perform Evaluation of Extensively Trained SAC Agents
+elif option == 'evaluation_extensive': # Perform Evaluation of the SAC agents trained across 10 Million timesteps
     evaluation_extensive(config)
 
     

@@ -24,9 +24,13 @@
 
 8. <a href="https://github.com/Sonali2824/Dissertation/tree/main/SAC"><b>SAC CODE</b></a>: Code used to train, tune, and evaluate SAC agents.
 
+9. <a href="https://github.com/Sonali2824/Dissertation/tree/main/DQN%20EXTENSIVE%20EVALUATION%20CODE"><b>DQN EXTENSIVE EVALUATION CODE</b></a>: Code used to evaluate the DQN agents trained across 10 Million timesteps.
+
 ## ⚙️ Running the code
 
 ```sh
+# Install dependencies
+pip install -r requirements.txt
 
 # After any change made to the Tetris Enviornment follow these steps
 cd gym-examples
