@@ -1,5 +1,5 @@
 config = {
-    "num_episodes_to_run": 50, #00, #50000000000000000000000000000000,
+    "num_episodes_to_run": 50000000000000000000000000000000,
     "num_timesteps_to_run": 10000000,
     "board_width": 10,
     "board_height": 10,
