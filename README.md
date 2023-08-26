@@ -45,6 +45,7 @@ python main.py tuning # For Hyperparameter Tuning
 python main.py evaluation # For Model Evaluation
 python main.py analysis # For Action and Reward Representation Analysis
 python main.py extensive # For Training across 10 Million Timesteps
+python main.py evaluation_extensive # For Extensively Trained Model Evaluation 
 
 # You can also  visualise the learning curves via TensorBoard
 tensorboard --logdir <exp_name> # exp_name refers to the log directory
