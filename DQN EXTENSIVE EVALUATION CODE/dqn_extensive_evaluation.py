@@ -62,7 +62,7 @@ for i in range(2, 4):
                 write_to_file(text)
             writer.add_scalar("timesteps/episode_reward", episode_reward, t)
             writer.add_scalar("timesteps/episode_lines_cleared", (cleared_lines), t)
-            writer.add_scalar("timesteps/episode+length", ep_len, t)
+            writer.add_scalar("timesteps/episode_length", ep_len, t)
             writer.add_histogram("reward_distribution", rewards, t)
             writer.add_histogram("action_distribution", actions, t)
             

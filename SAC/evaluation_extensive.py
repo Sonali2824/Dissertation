@@ -51,7 +51,7 @@ def evaluation_extensive(config):
         agent = AgentPreparation(config)
 
         # Load the state dictionary from the .pt file
-        agent.actor_local.load_state_dict(torch.load("6_5_actor_local_network_10_" + str(i) + ".pt", map_location=torch.device('cpu')))
+        agent.actor_local.load_state_dict(torch.load("6_5_actor_local_network_10_" + str(i) + ".pt", map_location=torch.device('cpu'))) # Replace with the respective .pt file, and Assign cpu/gpu
         agent.actor_local.eval()  # Set the model to evaluation mode
 
 
@@ -62,7 +62,7 @@ def evaluation_extensive(config):
         writer = SummaryWriter(log_dir = logdir)
 
         # Create your Tetris environment
-        env = gym.make("gym_examples/Tetris-Binary-v0", width = 10, height = 10, reward_type = 6)
+        env = gym.make("gym_examples/Tetris-Binary-v0", width = 10, height = 10, reward_type = 6) # Replace with the respective Reward
 
         # Define a function to record the environment
         def record_environment(env, num_timesteps=10000):

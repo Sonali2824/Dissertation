@@ -7,9 +7,9 @@ import random
 
 def extensive_training(config):
     print("Extensive Training", config)
-    config["seed"] = 1 #random.randint(1, 1000)
+    config["seed"] = 1 #random.randint(1, 1000) # Mention a Random or Assigned Seed
 
-    '''Setting Seeds and Torch Parameters for the Required Enviornments for Reproducability'''
+    '''Setting Seeds and Torch Parameters for the Required Environments for Reproducability'''
 
     # Setting Seed for Random and Numpy 
     random.seed(config["seed"])

@@ -1,4 +1,5 @@
-# Modifed Dellacherie heuristic reward
+# Reward Functions
+# Modified Dellacherie heuristic reward
 """
 Landing Height: The height at which the current piece fell.
 2. Eroded pieces: The contribution of the last piece to the cleared lines time the

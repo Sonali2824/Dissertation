@@ -147,7 +147,7 @@ class StopTrainingOnMaxEpisodes(BaseCallback):
         
         avg_lines_cleared = np.mean(self.episode_cleared_lines_list)
         avg_timestep_lines_cleared = np.mean(self.timestep_cleared_lines_list)
-        ep = "Average lines cleared across 50000 episodes:"
+        ep = "Average lines cleared across 30000 episodes:"
         self.writer.add_scalar(ep, avg_lines_cleared)
         self.writer.add_scalar("Average lines cleared timesteps:", avg_timestep_lines_cleared)
         self.writer.close()

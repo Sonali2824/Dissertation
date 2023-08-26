@@ -38,7 +38,7 @@ def action_reward_analysis(config):
         else:
             config["use_GPU"] = False
             
-        for j in range(1, 2): # Iterate for 3 Training Cycles
+        for j in range(1, 4): # Iterate for 3 Training Cycles
             config["trial_number"] = i
             config["iteration_number"] = j
             config["reward"] = i

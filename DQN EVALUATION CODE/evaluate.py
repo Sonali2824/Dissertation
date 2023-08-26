@@ -12,7 +12,7 @@ from tensorboardX import SummaryWriter
 
 # Function to Write Evaluation Results
 def write_to_file(word):
-    with open("unmasked_binary_evaluation_20.txt", "a") as file:
+    with open("masked_binary_evaluation.txt", "a") as file:
         file.write(word +"\n")
 
 # Inheriting the DQN Class to Incorporate Masking Actions
@@ -108,8 +108,8 @@ for i in range(1, 12):
         write_to_file(text)
 
         # Settting Model Files
-        model_filename = "unmasked_20/unmasked_binary_30k_20_" + str(i) + "_" +str(j) +".zip"
-        logdir = "unmasked_dqn_"+ str(i) + "_" +str(j)
+        model_filename = "masked_binary_30k_" + str(i) + "_" +str(j) +".zip"
+        logdir = "masked_dqn_"+ str(i) + "_" +str(j)
         writer = SummaryWriter(log_dir = logdir)
 
         # Load the DQN model from the saved file

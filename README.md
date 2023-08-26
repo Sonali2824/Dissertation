@@ -39,13 +39,12 @@ pip install -e .
 # Training/Evaluating Agent -- DQN
 python <training/evaluating.py>
 
-# SAC Agent
+# SAC Agent -- Change .pt file name accordingly in SAC\SACDiscreteAgent.py
 cd SAC
 python main.py tuning # For Hyperparameter Tuning
 python main.py evaluation # For Model Evaluation
 python main.py analysis # For Action and Reward Representation Analysis
 python main.py extensive # For Training across 10 Million Timesteps
-
 
 # You can also  visualise the learning curves via TensorBoard
 tensorboard --logdir <exp_name> # exp_name refers to the log directory

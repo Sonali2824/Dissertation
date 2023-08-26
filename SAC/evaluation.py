@@ -23,7 +23,7 @@ def evaluation(config):
     print("Evaluation")
     filename = "evaluation_1.txt"
 
-    config["seed"] = 1 #random.randint(1, 1000)
+    config["seed"] = 1 #random.randint(1, 1000) # Keep Seed Random or Assigned
 
     '''Setting Seeds and Torch Parameters for the Required Enviornments for Reproducability'''
 
@@ -50,18 +50,18 @@ def evaluation(config):
     agent = AgentPreparation(config)
 
     # Load the state dictionary from the .pt file
-    agent.actor_local.load_state_dict(torch.load("6_5_actor_local_network_10_1.pt", map_location=torch.device('cpu')))
+    agent.actor_local.load_state_dict(torch.load("6_1_actor_local_network.pt", map_location=torch.device('cpu'))) # Replace with the respective .pt file, and Assign cpu/gpu
     agent.actor_local.eval()  # Set the model to evaluation mode
 
 
     print("Actor", agent.actor_local)
 
     # Initialise the Writer        
-    logdir = "masked_sac_"+ str(1) 
+    logdir = "masked_sac_"+ str(1) # Name Log Directory as Relevant
     writer = SummaryWriter(log_dir = logdir)
 
     # Create your Tetris environment
-    env = gym.make("gym_examples/Tetris-Binary-v0", width = 10, height = 10, reward_type = 11)
+    env = gym.make("gym_examples/Tetris-Binary-v0", width = 10, height = 10, reward_type = 6) # Mention the Respective Reward 
 
     # Define a function to record the environment
     def record_environment(env, num_episodes=30):
