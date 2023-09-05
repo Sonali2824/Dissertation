@@ -1,4 +1,4 @@
-# SAC Agent Implementation is adapted from https://github.com/p-christ/Deep-Reinforcement-Learning-Algorithms-with-PyTorch
+# SAC Agent Implementation is adapted from https://github.com/p-christ/Deep-Reinforcement-Learning-Algorithms-with-PyTorch (Multiple Contributors)
 # Import Statements
 import gymnasium as gym
 import gym_examples
